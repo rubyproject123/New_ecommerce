@@ -1,0 +1,78 @@
+<aside class="left-side sidebar-offcanvas">
+	<!-- sidebar: style can be found in sidebar.less -->
+	<section class="sidebar">
+		<!-- Sidebar user panel -->
+		<div class="user-panel">
+				
+			<div class="pull-left image">
+					<%= image_tag "images.png", :class => "img-circle" %>
+			</div>
+
+			<div class="pull-left info">
+			<p>
+								<% if current_user  %>
+								<% if !current_user.name.blank? %>
+									 Hello <%= current_user.name  %>
+								 <% else %>
+									 Hello<%= current_user.email  %>
+								<% end %>
+								<% end %>
+								
+								<!-- Jane Doe - Web Developer
+								<small>Member since Nov. 2012</small -->
+							</p>
+			</div>
+		</div>
+		<ul class="sidebar-menu">
+			
+						<li class="active">
+							<a href="<%= admin_index_path %>"> <!--<i class="fa fa-dashboard"></i>--> <span>Dashboard</span> </a>
+						</li>
+						
+						
+	
+				<li class="treeview ">
+						<a href="#"><span>Users</span><i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu">
+								<li class="">
+										<a href="<%=admin_admin_index_path%>">  <span>Administrators</span> </a>
+								</li>
+								<li class="">
+										<a href="<%=admin_user_index_path%>">  <span>Buyers</span> </a>
+								</li>
+								
+						</ul>
+				</li>
+				<li class="treeview <%#= @active %>">
+						<a href="#"><span>Database</span><i class="fa fa-angle-left pull-right"></i></a>
+						<ul class="treeview-menu">
+								<!-- <li class="">
+						        
+						        	<a href="<%#=mobiles_path%>"> <span>Mobiles</span> </a>
+						       
+						        </li> -->
+						        <li class="">
+						        	<a href="<%=brands_path%>"> <span>Brand Names</span> </a>
+						        
+						        </li>
+						        <li class="">
+						        	<a href="<%=productcategories_path%>">Product Categories</a>
+						        </li>
+						        <li class="">
+						        	<a href="<%=testimonials_path%>"> <span>Testimonials</span> </a>
+						        
+						        </li>
+								
+				
+			</ul>
+			</li>
+			<li class="">
+							<a href="<%=products_path%>"> <!--<i class="fa fa-dashboard"></i>--> <span>Products</span></a>
+							
+
+						</li>
+						<li class="">
+							<a href="#"> <!--<i class="fa fa-dashboard"></i>--> <span>Orders</span> </a>
+						</li>
+	</section>
+</aside>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ecommerce</title>
+  <%= stylesheet_link_tag "backend", media: "all" %>
+    <%= javascript_include_tag "backend"%>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */ 
+     .jumbotron {
+      margin-bottom: 0;
+    }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+	  background-color: #f2f2f2;
+      padding: 25px;
+    }
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+  @brand-color: #b20000;
+#tcb-testimonial-carousel {
+    a{
+        color: @brand-color;
+    }
+    .text-brand{
+        color: @brand-color;
+    }
+    margin-top: 30px;
+    .carousel-indicators .active {
+        background: @brand-color;
+    }
+    .no-margin{
+        margin: 0;
+    }
+    .carousel-indicators li {
+        border: 1px solid #ccc;
+    }
+    .carousel-control {
+        color: @brand-color;
+        width: 5%;
+    }
+    .carousel-control:hover,
+    .carousel-control:focus {
+        color: @brand-color;
+    }
+    .carousel-control.left,
+    .carousel-control.right {
+        background-image: none;
+    }
+    .item{
+        padding: 15px 40px;
+        background: #f8f8f8;
+    }
+    .media-object {
+        margin: auto;
+    }
+    @media screen and (max-width: 768px) {
+        .media-object {
+            margin-bottom: 15px;
+        }
+    }
+}
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: blue}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+  </style>
+</head>
+<body>
+<%= render :partial => "layouts/headerHome"%>
+
+<%= yield %>
+<%= render :partial => "layouts/footerHome"%>
+</body>
+</html>

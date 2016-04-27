@@ -1,0 +1,164 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="<%= root_path%>"><%= image_tag "ElectronicsWorld-logo.png", :style => "margin-top: -15px;
+  background-color: white;
+  width: 125px;
+" %></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="<%= root_path%>">Home</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Products<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+           <% Productcategory.all.each do |f| %>
+               <li><a href="<%= home_product_path(f.id)  %>"><%= f.name %></a></li>
+           <% end %>
+          
+         
+          <!-- <li><a href="#">Page 1-3</a></li> -->
+        </ul>
+      </li>
+        <li><a href="<%=home_deals_path%>">Deals</a></li>
+        <li><a href="<%=home_contact_us_path %>">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <% if current_user %>
+      <li><a href="#"><span class="glyphicon glyphicon-user">Welcome <%= current_user.name.capitalize%>!</span></a></li>
+      <%else%>
+      <li><a href="#"data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user" ></span> Login</a></li>
+      <%end%>
+      <% if current_user %>
+      <li><a href="<%=logout_path%>"><span class="">Logout</span></a></li>
+      <%else%>
+        <li><a href="#" data-toggle="modal" data-target="#squarespaceModal"><span>Signup</span></a></li>
+      <%end%>
+           <% if !session[:CART_TEMP_RANDOM].nil? %>
+              <%   @count = Cart.where("tran_id = ?","#{session[:CART_TEMP_RANDOM]}").count %>
+           <% else %>
+               <% @count = 0 %>
+           <% end %>
+        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart (<%= @count %>)</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- ------------------login-------------------------- -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Log in</h4>
+      </div> <!-- /.modal-header -->
+
+      <div class="modal-body">
+        <%= form_tag '/login' do %>
+          <div class="form-group">
+            <div class="input-group">
+            <label for="exampleInputEmail1">Name</label><br>
+            <%#= text_field_tag :email %>
+              <input type="text" name = "email" class="form-control" id="uLogin" placeholder="Login">
+              <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
+            </div>
+          </div> <!-- /.form-group -->
+
+          <div class="form-group">
+            <div class="input-group">
+            <label for="exampleInputEmail1">Password</label><br>
+            <%#= password_field_tag :password%>
+              <input type="password" name="password" class="form-control" id="uPassword" placeholder="Password">
+              <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+            </div> <!-- /.input-group -->
+          </div> <!-- /.form-group -->
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Remember me
+            </label>
+          </div> <!-- /.checkbox -->
+          
+
+      </div> <!-- /.modal-body -->
+
+      <div class="modal-footer">
+        <button class="form-control btn btn-primary">Submit</button>
+         <%end%>
+        <div class="progress">
+          <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
+            <span class="sr-only">progress</span>
+          </div>
+        </div>
+      </div> <!-- /.modal-footer -->
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- ------------------login-------------------------- -->
+<!-- ------------------Signup-------------------------- -->
+<!-- line modal -->
+<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      <h4 class="modal-title" id="lineModalLabel">Sign Up</h4>
+    </div>
+    <div class="modal-body">
+      
+            <!-- content goes here -->
+      <%= form_for :user, url: '/users' do |f| %>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <%= f.text_field :name, :class =>"form-control", :id =>"exampleInputEmail1", :placeholder =>"Enter Name" %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <%= f.text_field :email, :class =>"form-control", :id =>"exampleInputEmail1", :placeholder =>"Enter email" %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <%= f.password_field :password , :class =>"form-control", :id =>"exampleInputPassword1", :placeholder =>"Enter Password" %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Confirmation Password</label>
+                <%= f.password_field :password_confirmation , :class =>"form-control", :id =>"exampleInputPassword1", :placeholder =>"Enter Confirmation Password" %>
+              </div>
+              <!-- <div class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <input type="file" id="exampleInputFile">
+                <p class="help-block">Example block-level help text here.</p>
+              </div> -->
+              <!-- <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Check me out
+                </label>
+              </div> -->
+              <%= f.hidden_field :role_id, :value => 2 %>
+              <%= f.submit "Submit", :class =>"form-control btn btn-primary" %>
+            <%end%>
+
+    </div>
+    <!-- <div class="modal-footer">
+      <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
+        </div>
+        <div class="btn-group btn-delete hidden" role="group">
+          <button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">Delete</button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">Save</button>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  </div>
+</div>
+<!-- ------------------Signup-------------------------- -->

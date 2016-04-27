@@ -1,0 +1,31 @@
+<%= render :partial => "home/slider"%>
+<a href="<%=home_mobiles_path%>", style = "color:red" >Back</a>
+<div class="container-fluid bg-grey">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel-body"> <img src="<%= @productdesc.image %>", style ="width:100%"   class="img-responsive"/><%#= image_tag "iphone5s.jpeg", :class =>"img-responsive", :style => "width:100%", :alt => "Image"%></div>
+    </div>
+  <%= form_tag home_cartcreate_path , :method => "get" do |f| %>
+    <div class="col-sm-8">
+        
+      <h2><%= @productdesc.name %></h2><br>
+      <ul class="list-group">
+        <li class="list-group-item">Brand  - <span><%= Brand.find(@productdesc.brand_id).name %></span></li> 
+        <li class="list-group-item">Price - <span><%= @productdesc.price %>$</span></li> 
+      </ul>
+      <h4><strong>About Product:</strong></h4><br>
+      <p><%= @productdesc.description %></p>
+      <%= hidden_field_tag "product_id", @productdesc.id  %>
+      
+      <%= hidden_field_tag "user_id", current_user.id  %>
+      <%= hidden_field_tag "product_category", @productdesc.product_category_id     %>
+    </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-8" style="text-align:right;padding: 10px; ">
+      <!-- <button type="button" class="btn btn-primary">Add to cart</button> -->
+      <%= submit_tag "Add to cart",  :class => "btn btn-primary" %>
+    <!-- <button type="button" class="btn btn-success">Checkout</button></div> -->
+  </div>
+<% end %>
+</div>
+<div class="clearfix"></div>

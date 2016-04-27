@@ -1,0 +1,46 @@
+<%= form_for(@testimonial,:html => {:class => "form-horizontal"}) do |f| %>
+  <div class="box-body">
+    <% if @testimonial.errors.any? %>
+        <div class="alert alert-warning alert-dismissable">
+          <i class="fa fa-warning"></i>
+          <button data-dismiss="alert" class="close" type="button">x</button>
+          <h4><%= pluralize(@testimonial.errors.count, "error") %> prohibited this Product Category from being saved:</h4>
+           <% @testimonial.errors.full_messages.each do |msg| %>
+           <ul>
+              <b><%= message %></b>
+          </ul><% end %>
+        </div>
+    <% end %> 
+  
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-8">
+          <%= f.text_field :name,:class => "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Designation</label>
+        <div class="col-sm-8">
+          <%= f.text_field :designation,:class => "form-control" %>
+        </div><br>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Image</label>
+        <div class="col-sm-8">
+          <%= f.file_field :image,:class => "form-control" %>
+        </div><br>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Descrition</label>
+        <div class="col-sm-8">
+          <%= f.text_area :descrition,:class => "form-control" %>
+        </div><br>
+        </div>
+
+    
+     <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <span><%= link_to 'Back', testimonials_path,:class =>"btn btn-primary" %> 
+     </div>
+  </div>
+<% end %>

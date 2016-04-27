@@ -1,0 +1,47 @@
+<section class="content-header">
+	<h1>Product Categories</h1>
+</section>
+<section class="content">
+	<div class="text-centre"><%= link_to "Add New Product Category",new_productcategory_path,:class => "btn btn-primary"%></div><br/>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+
+				<div class="box-body table-responsive">
+					<table id="example1" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Sr.No.</th>
+								<th>Name</th>
+								<th></th>
+							</tr>	
+						</thead>
+						<% @count = 0 %>
+						<% @productcategories.each do |productcategory|%>
+						<tbody>
+							<tr>
+								<% @count += 1 %>
+								<td><%=  @count %></td>
+								<td><%= productcategory.name %></td>
+
+								<td>
+									<%= link_to "<i class='glyphicon glyphicon-eye-open'></i>".html_safe, productcategory_path(productcategory),:class => " btn btn-default btn-xs" %>
+									<%= link_to "<i class='glyphicon glyphicon-pencil'></i>".html_safe, edit_productcategory_path(productcategory),:class => " btn btn-default btn-xs" %>
+									<%#= link_to "<i class='glyphicon glyphicon-trash'></i>".html_safe, productcategory,  data: { confirm: 'Are you sure?' },method: :delete,:class => " btn btn-default btn-xs" %>
+								</td>
+							</tr>
+						</tbody>
+						<% end %>
+					</table>
+
+					<% if @productcategories.count > 10 %>
+					<br/>
+					<div class="digg_pagination">
+						<%= will_paginate @productcategories, :container => false %>
+					</div>
+					<% end %>
+				</div>					
+			</div>						
+		</div>							
+	</div>								
+</section>

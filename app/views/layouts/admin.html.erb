@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <title>Ecommere</title>
+    <%= stylesheet_link_tag "backend", media: "all" %>
+    <%= javascript_include_tag "backend"%>
+    <%= csrf_meta_tags %>
+    <%#= favicon_link_tag 'cp-favicon.png' %>
+</head>
+<body class="skin-black fixed">
+  <%# if current_user %>
+      <%= render :partial => "layouts/header" %>
+  <%# end %>
+  
+  <div class="wrapper row-offcanvas row-offcanvas-left">
+    <%# if current_user %>
+     <%= render :partial => "layouts/sidebar"%>
+    <%# end %>
+    <aside class="right-side">  <!----class="right-side" firefox margin-left 220 px-->
+      <% if flash[:notice] %>
+        
+      <% end %>
+      <%= yield %>
+    </aside>
+  </div>
+  <%= render :partial => "layouts/ga" if Rails.env=='production'%>
+</body>
+</html>

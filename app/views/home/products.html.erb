@@ -1,0 +1,37 @@
+
+<%= render :partial => "home/slider"%>
+<div class="container">
+
+<h3>Products</h3>    
+
+  <div class="row">
+  <%  @products.each do |products|%>
+    <div class="col-sm-4">
+    
+    <a href="<%= product_desc_path(products.id)%>">
+      <div class="panel panel-primary">
+        <%# @mobiles.each do |mobile|%>
+        <div class="panel-heading"><%= products.name %></div>
+        <div class="panel-body"><img src="<%= products.image%>", class ="img-responsive", style = "width:358px;height:274px", alt = "Image"><%#= image_tag "hp.jpg", :class =>"img-responsive", :style => "width:100%", :alt => "Image"%></div>
+        <div class="panel-footer"><ul class="list-group">
+        <li class="list-group-item"> Brand - <span><%= Brand.find(products.brand_id).name %></span></li>
+          <li class="list-group-item"> Price - <span><%= products.price %>$</span>
+        </li>
+          
+        </ul>   </div>
+        
+        </div>
+    </a>
+      
+    </div>
+    <%end%>
+    <!--  -->
+  </div>
+  <div class="row">
+              <div class="col-xs-12" style="text-align:left;">
+                <% if @products.size > 0 %>
+                  <%= will_paginate @products %>
+                <% end %>
+              </div>
+            </div>
+</div><br><br>

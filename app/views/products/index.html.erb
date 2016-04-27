@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+<section class="content-header">
+
+  <h1>Listing Products</h1>
+</section>
+<section class="content">
+    <div class="text-centre">
+      <%= link_to "Add New Product",new_product_path,:class => "btn btn-primary"%>
+    </div><br/>
+<div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+
+        <div class="box-body table-responsive">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Sno</th>
+                    <th>Name</th>
+                    <th>Product category</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @a = 1 %>
+                  <% @products.each do |product| %>
+                    <tr>
+                      <td><%= @a %></td>
+                      <td><%= product.name %></td>
+                        <% @name = Productcategory.find(product.product_category_id )  %>
+                      <td><%= @name.name %></td>
+                        <% @name = Brand.find(product.brand_id )  %>
+                      <td><%= @name.name %></td>
+                      <td><%= product.price %></td>
+                      <td> <%= image_tag product.image, :style => "width:50px;height:50px;" %><%#= product.image %></td>
+                      <td><%= product.description %></td>
+                      <td>
+                        <%= link_to "<i class='glyphicon glyphicon-eye-open'></i>".html_safe,  product_path(product.id),:class => " btn btn-default btn-xs" %>
+                        <%= link_to "<i class='glyphicon glyphicon-pencil'></i>".html_safe, edit_product_path(product),:class => " btn btn-default btn-xs" %>
+                        <!-- <%#= link_to "<i class='glyphicon glyphicon-trash'></i>".html_safe, brand_path(mobile.id),  data: { confirm: 'Are you sure?' },method: :delete,:class => " btn btn-default btn-xs" %> -->
+                    </td>
+                    </tr>
+                    <% @a = @a + 1 %>
+                  <% end %>
+                </tbody>
+              </table>
+        </div>
+      </div>
+      </div>
+    </div>
+</section>

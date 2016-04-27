@@ -1,0 +1,78 @@
+<%= render :partial => "home/slider"%>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<div class="row">
+							<div class="col-xs-6">
+								<h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+							</div>
+							<div class="col-xs-6">
+								<!-- <button type="button" class="btn btn-primary btn-sm btn-block">
+									<span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+								</button> -->
+
+								<%= link_to "Continue shopping", home_deals_path ,:class => "btn btn-primary btn-sm btn-block" %>s
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+				<% if @details.count > 0%>
+				<% @total = 0 %>
+				<% @details.each do |f|  %>
+					<div class="row">
+					      <% @pdesc = Product.find(f.product_id) %>
+						<div class="col-xs-2"><!-- <img class="img-responsive" src="http://placehold.it/100x70"> -->
+						<%= image_tag @pdesc.image, :class => "img-responsive" %>
+						</div>
+						<div class="col-xs-3">
+							<h4 class="product-name"><strong> <%= @pdesc.name  %> </strong></h4><h4><small><%= @pdesc.description %></small></h4>
+						</div>
+						<div class="col-xs-2">
+							<h4 class="product-name"><strong> <%= Productcategory.find(@pdesc.product_category_id).name  %> </strong></h4>						</div>
+						<div class="col-xs-2">
+							<div class="col-xs-6 text-right">
+								<h6><strong><%=  @pdesc.price %> </strong></h6>
+								<% @total = @total + @pdesc.price  %>
+							</div>
+							
+							<div class="col-xs-2">
+								
+								<%#= link_to <span class="glyphicon glyphicon-trash"> </span>.html_safe, :class => "btn btn-link btn-xs" %>
+									<%= link_to "<i class='glyphicon glyphicon-trash'></i>".html_safe,   cartdel_path(f.id),:class => "btn btn-link btn-xs" %>
+								
+							</div>
+						</div>
+					</div>
+					<hr>
+				<% end %>
+				<% else %>
+					<div class="row">
+						<div class="col-xs-12 text-center">
+						   <p>No Products</p>
+							
+						</div>
+						
+					</div>
+				<% end %>
+				</div>
+				<div class="panel-footer">
+					<div class="row text-center">
+						<div class="col-xs-9">
+							<h4 class="text-right">Total <strong>$<%= @total %></strong></h4>
+						</div>
+						<div class="col-xs-3">
+							<!-- <button type="button" class="btn btn-success btn-block">
+								Checkout
+							</button> -->
+							<%= link_to "checkout", home_shipingAddress_path ,:class => "btn btn-success btn-block" %>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

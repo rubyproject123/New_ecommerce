@@ -1,0 +1,35 @@
+
+<%= render :partial => "home/slider"%>
+<div class="container"> 
+<h3>Computers</h3>   
+  <div class="row">
+    
+    <% @computers.each do |computer|%>
+    <div class="col-sm-4">
+    <a href="<%=computer_desc_path(computer.id)%>">
+      <div class="panel panel-primary">
+        <%# @computers.each do |computer|%>
+        <div class="panel-heading"><%= computer.name %></div>
+        <div class="panel-body"><img src="<%= computer.image%>", class ="img-responsive", style = "width:358px;height:274px", alt = "Image"><%#= image_tag "hp.jpg", :class =>"img-responsive", :style => "width:100%", :alt => "Image"%></div>
+        <div class="panel-footer"><ul class="list-group">
+        <li class="list-group-item"> Brand - <span><%= Brand.find(computer.brand_id).name %></span></li>
+          <li class="list-group-item"> Price - <span><%= computer.price %>$</span>
+        </li>
+          
+        </ul>   </div>
+        
+        </div>
+    </a>
+      
+    </div>
+    <%end%>
+    <!--  -->
+  </div>
+  <div class="row">
+              <div class="col-xs-12" style="text-align:left;">
+                <% if @computers.size > 0 %>
+                  <%= will_paginate @computers %>
+                <% end %>
+              </div>
+            </div>
+</div><br><br>

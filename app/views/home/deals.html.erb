@@ -1,0 +1,29 @@
+
+<%= render :partial => "home/slider"%>
+<div class="container">
+<h3>Latest Products</h3>    
+  <div class="row">
+  <% @products.each do |product|%>
+    <div class="col-sm-4">
+    
+    <a href="<%=product_desc_path(product.id)%>">
+      <div class="panel panel-primary">
+        <%# @products.each do |product|%>
+        <div class="panel-heading"><%= product.name %></div>
+        <div class="panel-body"><img src="<%= product.image%>", class ="img-responsive", style = "width:358px;height:274px", alt = "Image"><%#= image_tag "hp.jpg", :class =>"img-responsive", :style => "width:100%", :alt => "Image"%></div>
+        <div class="panel-footer"><ul class="list-group">
+        <li class="list-group-item"> Brand - <span><%= Brand.find(product.brand_id).name %></span></li>
+          <li class="list-group-item"> Price - <span><%= product.price %>$</span>
+        </li>
+          
+        </ul>   </div>
+        
+        </div>
+    </a>
+      
+    </div>
+    <%end%>
+    <!--  -->
+  </div>
+  </div><br><br>
+</div><br><br>

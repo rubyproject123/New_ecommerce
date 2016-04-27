@@ -1,0 +1,110 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+   
+   function readURL(input)
+   {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          
+          reader.onload = function (e) {
+              $('#partimgtag').attr('src', e.target.result);
+              $('#partimgtag').css("display","");
+              $("#editpartimgtag").css("display","none");
+          }
+          
+          reader.readAsDataURL(input.files[0]);
+      }
+    } 
+   
+   $("#productpart_srch_image").change(function(){
+      readURL(this);
+    }) ;
+   $('#productpriceusd ').keyup(function(){
+        // alert("hello");
+        money = $("#productpriceusd").val();
+        $.ajax({
+            url: "<%= root_url %>/productparts/convertmoney/" + money,
+            context: document.body
+        }).done(function(r) {
+          $("#productpriceni").val(r);
+          $("#productpriceni1").val(r);
+          
+        });
+
+      });
+
+   $("#adddays").click(function(){
+
+         $("#productpart_days").toggle();
+   });
+    
+    
+  });
+    
+</script>
+
+<%= form_for(@product,:html => {:class => "form-horizontal"}) do |f| %>
+<div class="box-body">
+  <% if @product.errors.any? %>
+     <div class="alert alert-warning alert-dismissable">
+          <i class="fa fa-warning"></i>
+          <button data-dismiss="alert" class="close" type="button">x</button>
+      <h4><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h4>
+
+      <ul>
+      <% @product.errors.full_messages.each do |message| %>
+          <b><%= message %></b>
+      
+      </ul>
+      <% end %>
+    </div>
+  <% end %>
+
+   <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-8">
+          <%= f.text_field :name,:class => "form-control" %>
+        </div>
+    </div>
+  <div class="form-group">
+   
+    <label class="col-sm-2 control-label">Product Category</label>
+    <div class="col-sm-8">
+    <%= f.select :product_category_id,Productcategory.all.order("name asc").collect { |c|[c.name,c.id] },{:prompt => "Product Category"},:class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+     <label class="col-sm-2 control-label">Brand</label>
+     <div class="col-sm-8">
+    <%= f.select :brand_id,Brand.all.order("name asc").collect { |c|[c.name,c.id] },{:prompt => "Brand Name"},:class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Price</label>
+    <div class="col-sm-8">
+    <%= f.number_field :price ,:class => "form-control"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Image</label>
+    <div class="col-sm-8">
+     <img src="<%= f.object.image %>" width="100" height="100" class="thumbnail" id="partimgtag" style="display: none">
+     <% if params[:action] == "edit" %>
+            <img src="<%= f.object.image %>" width="100" height="100" class="thumbnail" id="editpartimgtag">
+          <% end %>
+    <%= f.file_field :image,:class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    
+    <label class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-8">
+    <%= f.text_area :description,:class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group text-center">
+     <button type="submit" class="btn btn-primary">Submit</button>
+     <%= link_to 'Back', mobiles_path,:class =>"btn btn-primary" %> 
+    
+  </div>
+<% end %>

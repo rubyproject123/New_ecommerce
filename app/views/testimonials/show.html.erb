@@ -1,0 +1,51 @@
+<section class="content-header">
+  <%= link_to 'Back', testimonials_path,:class =>"btn btn-primary pull-right" %>
+  <h1>Testimonials Details</h1>
+</section>
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-body form-horizontal">
+        <div class="row">
+          <div class="form-group">  
+            <label class="col-sm-4 text-right"><%= notice   %></label>
+          </div>
+          
+            <div class="col-xs-8">
+              <div class="form-group">  
+                <label class="col-sm-4 text-right">Name:</label>
+                <div class="col-sm-7">
+                  <%= @testimonial.name %>
+                </div>
+                </div>
+                <div class="form-group"> 
+                <label class="col-sm-4 text-right">Designation</label>
+                <div class="col-sm-7">
+                  <%= @testimonial.designation %>
+                </div>
+                </div>
+                <div class="form-group"> 
+                <label class="col-sm-4 text-right">Image</label>
+                <div class="col-sm-7">
+                  <%= @testimonial.image %>
+                </div>
+                </div>
+                <div class="form-group"> 
+                <label class="col-sm-4 text-right">Description</label>
+                <div class="col-sm-7">
+                  <%= @testimonial.descrition %>
+                </div>
+                </div>
+                <div class="form-group"> 
+                <div class="col-sm-1">
+                   <%= link_to 'Edit', edit_testimonial_path(@testimonial),:class =>"btn btn-primary" %>
+                   </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

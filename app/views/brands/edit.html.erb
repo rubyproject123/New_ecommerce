@@ -1,0 +1,41 @@
+<section class="content-header">
+    <h1>Edit Brand Name</h1>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-primary">
+				<%= form_for @brandname, :url => {:action => 'update'}, :html => {:class => "form-horizontal"} do |f| %>
+<div class="box-body">
+    <% if @brandname.errors.any? %>
+        <div class="alert alert-warning alert-dismissable">
+          <i class="fa fa-warning"></i>
+          <button data-dismiss="alert" class="close" type="button">x</button>
+          <h4><%= pluralize(@brandname.errors.count, "error") %> prohibited this Product Category from being saved:</h4>
+           <% @brandname.errors.full_messages.each do |msg| %>
+           <ul>
+              <b><%= msg %></b>
+          </ul><% end %>
+        </div>
+    <% end %> 
+  
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-8">
+          <%= f.text_field :name,:class => "form-control" %>
+        </div>
+    </div>
+    
+     <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <span><%= link_to 'Back', brands_path,:class =>"btn btn-primary" %> 
+     </div>
+  </div>
+
+
+
+ <% end %>
+			</div>
+		</div>
+	</div>
+</section>

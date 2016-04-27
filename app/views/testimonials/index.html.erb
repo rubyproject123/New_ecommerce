@@ -1,0 +1,53 @@
+<section class="content-header">
+  <h1>Testimonials</h1>
+</section>
+<section class="content">
+  <div class="text-centre"><%= link_to "Add New Testimonial",new_testimonial_path,:class => "btn btn-primary"%></div><br/>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-body table-responsive">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                  <th>S.no</th>
+                  <th>Name</th>
+                  <th>Designation</th>
+                  <th>Image</th>
+                  <th>Descrition</th>
+                  <th colspan="3">Actions</th>
+              </tr>
+            </thead>
+            <% @count = 0 %>
+            <tbody>
+    <% @testimonials.each do |testimonial| %>
+      <tr>
+      <% @count += 1 %>
+                <td><%=  @count %></td>
+        <td><%= testimonial.name %></td>
+        <td><%= testimonial.designation %></td>
+        <td><img src="<%= testimonial.image %>" width="400" height="100" class="thumbanil"/><%#= testimonial.image %></td>
+        <td><%= testimonial.descrition %></td>
+        <td>
+                  <%= link_to "<i class='glyphicon glyphicon-eye-open'></i>".html_safe,testimonial,:class => " btn btn-default btn-xs" %>
+                  <%= link_to "<i class='glyphicon glyphicon-pencil'></i>".html_safe, edit_testimonial_path(testimonial),:class => " btn btn-default btn-xs" %>
+                  <%= link_to "<i class='glyphicon glyphicon-trash'></i>".html_safe, testimonial,  data: { confirm: 'Are you sure?' },method: :delete,:class => " btn btn-default btn-xs" %>
+                </td>
+      </tr>
+    <% end %>
+  </tbody>
+            </table>
+            <% if @testimonials.count > 10 %>
+          <br/>
+          <div class="digg_pagination">
+            <#= will_paginate @testimonials, :container => false %>
+          </div>
+          <% end %>
+            </div>
+
+      </div>
+      </div>
+      </div>
+
+
+</section>

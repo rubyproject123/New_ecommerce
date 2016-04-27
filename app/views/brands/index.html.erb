@@ -1,0 +1,47 @@
+<section class="content-header">
+	<h1>Brand Names</h1>
+</section>
+<section class="content">
+	<div class="text-centre"><%= link_to "Add New Brand Name",new_brand_path,:class => "btn btn-primary"%></div><br/>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+
+				<div class="box-body table-responsive">
+					<table id="example1" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Sr.No.</th>
+								<th>Name</th>
+								<th></th>
+							</tr>	
+						</thead>
+						<% @count = 0 %>
+						<% @brandnames.each do |brandname|%>
+						<tbody>
+							<tr>
+								<% @count += 1 %>
+								<td><%=  @count %></td>
+								<td><%= brandname.name %></td>
+
+								<td>
+									<%= link_to "<i class='glyphicon glyphicon-eye-open'></i>".html_safe,  brand_path(brandname.id),:class => " btn btn-default btn-xs" %>
+									<%= link_to "<i class='glyphicon glyphicon-pencil'></i>".html_safe, edit_brand_path(brandname),:class => " btn btn-default btn-xs" %>
+									<!-- <%#= link_to "<i class='glyphicon glyphicon-trash'></i>".html_safe, brand_path(brandname.id),  data: { confirm: 'Are you sure?' },method: :delete,:class => " btn btn-default btn-xs" %> -->
+								</td>
+							</tr>
+						</tbody>
+						<% end %>
+					</table>
+
+					<% if @brandnames.count > 10 %>
+					<br/>
+					<div class="digg_pagination">
+						<%= will_paginate @brandnames, :container => false %>
+					</div>
+					<% end %>
+				</div>					
+			</div>						
+		</div>							
+	</div>								
+</section>
