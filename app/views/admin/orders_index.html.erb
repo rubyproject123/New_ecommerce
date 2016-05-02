@@ -1,0 +1,89 @@
+<section class="content-header">
+  <h1>Listing carts</h1>
+</section>
++<section class="content">
+  <div class="text-centre"><%#= link_to "Add New cart",new_cart_path,:class => "btn btn-primary"%></div><br/>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+
+        <div class="box-body table-responsive">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Sr.No.</th>
+                <th>Reference Id</th>
+                <th>Product</th>
+                <th>Product Category</th>
+                <th>Buyer Email</th>
+                <th>Price</th>
+                <th>Status</th>
+                <!-- <th>Image</th> -->
+                
+              </tr> 
+            </thead>
+            <% @count = 0 %>
+            <% @carts.each do |cart|%>
+            <tbody>
+              <tr>
+                <% @count += 1 %>
+                <td><%= @count%></td>
+                <td><%= cart.tran_id %></td>
+                <td><%= Product.find(cart.product_id).name %></td>
+                <td><%= Productcategory.find(cart.product_category).name %></td>
+                <td><%=User.find(cart.user_id).email%></td>
+                <td><%= Product.find(cart.product_id).price%></td>
+                <td><%= cart.status %>
+                <%= link_to "<i class='glyphicon glyphicon-pencil'></i>".html_safe, 'javascript:void(0)',:class => "btn btn-default btn-xs",:id => "edit#{@count}" %>
+                <%= form_tag home_statuscreate_path, :id => "status_form#{@count}" do |f| %>
+                    <select id="status<%= @count %>" style="display:none;" name="order_status">  
+                     <option value="">--select status--</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Dispatch">Dispatch</option>
+                      <option value="Sucess">Sucess</option>
+                    </select>
+                    <input type="hidden" name="tran_id" id="tran_id" value="<%= cart.tran_id %>">
+                <% end %>
+                </td>
+                <!-- <td> <img src="<%#= cart.image%>"></td> 
+                -->
+
+                <td>
+                  <%#= link_to "<i class='glyphicon glyphicon-eye-open'></i>".html_safe,  cart_path(cart.id),:class => " btn btn-default btn-xs" %>
+                  <%#= link_to "<i class='glyphicon glyphicon-pencil'></i>".html_safe, edit_cart_path(cart),:class => " btn btn-default btn-xs" %>
+                  <!-- <%#= link_to "<i class='glyphicon glyphicon-trash'></i>".html_safe, brand_path(cart.id),  data: { confirm: 'Are you sure?' },method: :delete,:class => " btn btn-default btn-xs" %> -->
+                </td>
+              </tr>
+            </tbody>
+            <% end %>
+          </table>
+
+          <% if @carts.count > 10 %>
+          <br/>
+          <div class="digg_pagination">
+            <%= will_paginate @carts, :container => false %>
+          </div>
+          <% end %>
+        </div>          
+      </div>            
+    </div>              
+  </div>                
+</section>
+<script type="text/javascript">
+  $(document).ready(function(){
+      <% (1..@carts.count).each do |f| %>
+        $( "#edit<%= f %>" ).click(function() {
+           
+            $('#status<%= f %>').show();
+        });
+
+        $( "#status<%= f %>" ).change(function() {
+            
+            $("#status_form<%= f %>").submit();
+
+        });    
+
+
+      <% end %>
+  });
+</script>

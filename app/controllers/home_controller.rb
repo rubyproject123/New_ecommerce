@@ -43,9 +43,9 @@ class HomeController < ApplicationController
   end
 
   def product_sucess
-    
+    Cart.where(:tran_id => session[:CART_TEMP_RANDOM]).update_all(:status => "pending")
     session[:CART_TEMP_RANDOM] = nil
-    redirect_to root_path
+    redirect_to root_path, :flash => { :notice => "Order Purchased Sucessfully" }
   end
 
   def contact_us
@@ -56,6 +56,11 @@ class HomeController < ApplicationController
      @details = Cart.where(:tran_id => session[:CART_TEMP_RANDOM]);
 
      
+  end
+
+  def statuscreate
+    Cart.where(:tran_id => params[:tran_id]).update_all(:status => params[:order_status])
+    redirect_to admin_orders_index_path
   end
 
   def deals

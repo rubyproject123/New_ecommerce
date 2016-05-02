@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   get 'admin/admin_new'
   post "admin_create" => "admin#admin_create", :as => :admin_create 
   get 'admin/user_new'
+  get 'admin/orders_index'
   post "user_create" => "admin#user_create", :as => :user_create 
-
+  get 'home/products' => "home#products", :as => :home_product
   #get 'home/index'
-  get 'home/products/:id' => "home#products", :as => :home_product
+  #get 'home/products/:id' => "home#products", :as => :home_product
   get "product_desc/:id" => "home#product_desc", :as => :product_desc
   #get 'home/product_desc'
   get 'home/shipingAddress'
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   get 'home/mobiles'
   get 'home/computers'
   get 'home/product_sucess'
+  post 'home/statuscreate'
   get "mobile_desc/:id" => "home#mobile_desc", :as => :mobile_desc
   get "computer_desc/:id" => "home#computer_desc", :as => :computer_desc
   get "cartdel/:id" => "home#cartdel", :as => :cartdel

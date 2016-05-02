@@ -39,6 +39,10 @@ class AdminController < ApplicationController
     end    
   end
 
+  def orders_index
+    @carts = Cart.all.paginate(:page => params[:page], :per_page => 10)
+  end
+
   private
 
   def user_params

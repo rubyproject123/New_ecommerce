@@ -1,3 +1,30 @@
 <%= render :partial => "home/slider"%>
 <%= render :partial => "home/whatWe"%>
 <%= render :partial => "home/testmonial"%>
+<div class="modal fade" id="modalsucess" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <p>Your product is purchased sucessfully.</p>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<% if !flash[:notice].nil? %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#modalsucess").modal("show");
+	});
+</script>
+<% end %>
