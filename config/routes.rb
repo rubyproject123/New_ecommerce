@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   get 'admin/user_new'
   get 'admin/orders_index'
   post "user_create" => "admin#user_create", :as => :user_create 
-  get 'home/products' => "home#products", :as => :home_product
+  #get 'home/products' => "home#products", :as => :home_product
   #get 'home/index'
-  #get 'home/products/:id' => "home#products", :as => :home_product
+   get 'home/products/:id' => "home#products", :as => :home_product
   get "product_desc/:id" => "home#product_desc", :as => :product_desc
   #get 'home/product_desc'
   get 'home/shipingAddress'
