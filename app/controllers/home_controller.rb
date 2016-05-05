@@ -1,24 +1,18 @@
 class HomeController < ApplicationController
   layout "application"
-  before_action :set_mobile, only: [:mobile_desc]
-  before_action :set_computer, only: [:computer_desc]
+  before_filter :authorize, only: [:product_desc, :shipingAddress, :statuscreate, :cartcreate]
   def index
     @testimonials = Testimonial.last(3)
   end
-  def mobiles
-  	 # @mobiles = Mobile.all.paginate(:page => params[:page], :per_page => 10)
-    #  @mobiles = 
-       @products = Products.where("product_category_id =?",params[:id])
-       
-
-  end
-  def computers
-     @computers = Computer.all.paginate(:page => params[:page], :per_page => 10)
-  end
-
   def products 
+    if params[:search]
+          @products = Product.search(params[:search]).where("product_category_id =?",params[:id]).paginate(:page => params[:page], :per_page => 10)
+        else
+          @products = Product.where("product_category_id =?",params[:id]).paginate(:page => params[:page], :per_page => 10)
 
-     @products = Product.where("product_category_id =?",params[:id]).paginate(:page => params[:page], :per_page => 10)
+        end
+
+     #@products = Product.where("product_category_id =?",params[:id]).paginate(:page => params[:page], :per_page => 10)
        
   end
 
@@ -28,12 +22,6 @@ class HomeController < ApplicationController
 
   end
 
-  def mobile_desc
-    
-  end
-  def computer_desc
-  	#@computer = Computer.find(params[:id])
-  end
 
   def shipingAddress
 

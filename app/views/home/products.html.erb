@@ -4,6 +4,24 @@
 
 <h3>Products</h3>    
 
+  
+        <div class="container">
+  <div class="row" style="  padding-bottom: 40px;margin-left: 300px;">
+    
+        <div class="search" style="text-align:center">
+        <%= form_tag(home_product_path, :method => "get",:class =>'form-inline', id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Product Name", :class => "form-control input-sm", :maxlength => "300", :style => "width: 500px;
+  margin-left: 0px;
+  height: 50px"   %>
+<!-- <input type="text" class="form-control input-sm" maxlength="300" placeholder="Search" style="width: 500px;
+  margin-left: 0px;
+  height: 50px;" /> -->
+  <%= button_tag "Search", :name => nil, :class => "btn btn-primary btn-sm"  %>
+ <%end%>
+</div>
+  </div>
+</div>
+
   <div class="row">
   <%  @products.each do |products|%>
     <div class="col-sm-4">
@@ -35,3 +53,56 @@
               </div>
             </div>
 </div><br><br>
+<style type="text/css">
+  #search {
+    
+    margin-top: 0px;
+    width: 250px;
+}
+
+.search {
+    padding: 5px 0;
+    width: 230px;
+    height: 30px;
+    position: relative;
+    left: 10px;
+    float: left;
+    line-height: 22px;
+}
+
+    /*.search input {
+        position: absolute;
+        width: 0px;
+        float: Left;
+        margin-left: 210px;
+        -webkit-transition: all 0.7s ease-in-out;
+        -moz-transition: all 0.7s ease-in-out;
+        -o-transition: all 0.7s ease-in-out;
+        transition: all 0.7s ease-in-out;
+        height: 30px;
+        line-height: 18px;
+        padding: 0 2px 0 2px;
+        border-radius:1px;
+    }*/
+
+        .search:hover input, .search input:focus {
+            width: 500px;
+  margin-left: 0px;
+  height: 50px;
+        }
+
+.btn {
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    border-radius:1px;
+}
+.btn.btn-sm {
+  font-size: 12px;
+  margin-right: -331px;
+  height: 50px;
+  width: 81px;
+}
+
+</style>

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :computers
-  resources :mobiles
   resources :products
   resources :brands
   resources :productcategories
